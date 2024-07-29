@@ -1,0 +1,50 @@
+import React, { useEffect, useState } from 'react';
+import { Text, View } from 'react-native';
+import { initDatabase, insertData } from './src/services/DatabaseService';
+
+export default function App() {
+  const [accelerometerData, setAccelerometerData] = useState(null);
+
+  useEffect(() => {
+    // Initialize the database when the component mounts
+    initDatabase();
+
+    // Start collecting accelerometer data at regular intervals
+    const timer = setInterval(() => {
+      // Get accelerometer data
+      const accelerometerData = getAccelerometerData();
+      
+      // Set the accelerometer data in state
+      setAccelerometerData(accelerometerData);
+      
+      // Insert the accelerometer data into the database
+      insertData(accelerometerData);
+    }, 200); // Adjust the interval (in milliseconds) as needed
+
+    // Return a cleanup function to stop the timer when the component unmounts
+    return () => clearInterval(timer);
+  }, []);
+
+  const getAccelerometerData = () => {
+    // Get accelerometer data using your preferred method
+    // For example, you can use expo-sensors or any other library
+    return {
+      x: Math.random(), // Replace with actual accelerometer data
+      y: Math.random(), // Replace with actual accelerometer data
+      z: Math.random(), // Replace with actual accelerometer data
+      timestamp: Date.now(), // Use current timestamp
+    };
+  };
+
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>App is running...</Text>
+      {accelerometerData && (
+        <View>
+          <Text>X: {accelerometerData.x}, Y: {accelerometerData.y}, Z: {accelerometerData.z}</Text>
+          <Text>Timestamp: {accelerometerData.timestamp}</Text>
+        </View>
+      )}
+    </View>
+  );
+}
