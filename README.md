@@ -25,7 +25,7 @@ This trained model is then used within FitTrack to predict user activities based
 
 ####  Model Performance
 FitTrack's Random Forest machine learning model exhibits strong performance metrics, showcasing its effectiveness in predicting user activities based on accelerometer data. 
-Overall Accuracy: 72% F-1 Score
+Overall Accuracy: 85% F-1 Score
 The F1-score is a harmonic mean of precision and recall, providing a balanced measure of the model's performance. 
 FitTrack's machine learning model achieves consistent and reliable performance across various activity categories, contributing to an enhanced user experience and accurate activity tracking within the app!
 
